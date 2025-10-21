@@ -41,27 +41,25 @@ function displayDigimonOne(content) {
             nameEl.innerText = data.name;
             digiEl.appendChild(nameEl);
 
-            for (let i = 0; i < content.length; i++) {
-                const imageEl = document.createElement('img');
-                imageEl.classList.add('image');
-                imageEl.src = data.images[i].href;
-                digiEl.appendChild(imageEl)
+            const imageEl = document.createElement('img');
+            imageEl.classList.add('image');
+            imageEl.src = data.images[0].href;
+            digiEl.appendChild(imageEl)
 
-                const attEl = document.createElement('p');
-                attEl.classList.add('name');
-                attEl.innerText = data.attributes[i].attribute;
-                digiEl.appendChild(attEl);
+            const attEl = document.createElement('p');
+            attEl.classList.add('name');
+            attEl.innerText = data.attributes[0].attribute;
+            digiEl.appendChild(attEl);
 
-                const levelEl = document.createElement('p');
-                levelEl.classList.add('name');
-                levelEl.innerText = data.levels[i].level;
-                digiEl.appendChild(levelEl);
+            const levelEl = document.createElement('p');
+            levelEl.classList.add('name');
+            levelEl.innerText = data.levels[0].level;
+            digiEl.appendChild(levelEl);
 
-                const descrEl = document.createElement('p');
-                descrEl.classList.add('name');
-                descrEl.innerText = data.descriptions[1].description;
-                digiEl.appendChild(descrEl);
-            }
+            const descrEl = document.createElement('p');
+            descrEl.classList.add('name');
+            descrEl.innerText = data.descriptions[1].description;
+            digiEl.appendChild(descrEl);
 
         }
     }
