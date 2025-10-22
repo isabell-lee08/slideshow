@@ -1,10 +1,10 @@
-const slideshowContainer = document.querySelector('#slideshow_container');
+const slideshowContainer = document.querySelector('.carousel__items');
 
-async function getDigimon() {
+async function getDigimon(url) {
     try {
-        const response = await fetch('https://digi-api.com/api/v1/digimon');
+        const response = await fetch(url);
         const data = await response.json();
-        console.log(data.content);
+        console.log(data);
         displayDigimonOne(data.content);
 
     } catch (error) {
@@ -13,6 +13,7 @@ async function getDigimon() {
 }
 
 function displayDigimonOne(content) {
+
     for (let i = 0; i < content.length; i++) {
 
         let digiURL = content[i].href;
@@ -28,41 +29,41 @@ function displayDigimonOne(content) {
                 console.error(error);
             }
         }
+
         getDigimonSub();
 
         function displayDigimonTwo(data) {
 
-            const digiEl = document.createElement('div');
-            digiEl.classList.add('digimon');
+            const digiEl = document.createElement('li');
+            digiEl.classList.add('carousel__item');
             slideshowContainer.appendChild(digiEl);
-
-            const nameEl = document.createElement('p');
-            nameEl.classList.add('name');
-            nameEl.innerText = data.name;
-            digiEl.appendChild(nameEl);
 
             const imageEl = document.createElement('img');
             imageEl.classList.add('image');
             imageEl.src = data.images[0].href;
             digiEl.appendChild(imageEl)
 
-            const attEl = document.createElement('p');
-            attEl.classList.add('name');
-            attEl.innerText = data.attributes[0].attribute;
-            digiEl.appendChild(attEl);
+            const textEl = document.createElement('div');
+            textEl.classList.add('text');
+            digiEl.appendChild(textEl);
 
-            const levelEl = document.createElement('p');
-            levelEl.classList.add('name');
-            levelEl.innerText = data.levels[0].level;
-            digiEl.appendChild(levelEl);
+            const nameEl = document.createElement('p');
+            nameEl.classList.add('name');
+            nameEl.innerText = data.name;
+            textEl.appendChild(nameEl);
+
+            const levelAttEl = document.createElement('p');
+            levelAttEl.classList.add('lvlAtt');
+            levelAttEl.innerText = (data.levels[0].level + " / " + data.attributes[0].attribute);
+            textEl.appendChild(levelAttEl);
 
             const descrEl = document.createElement('p');
-            descrEl.classList.add('name');
+            descrEl.classList.add('descr');
             descrEl.innerText = data.descriptions[1].description;
-            digiEl.appendChild(descrEl);
+            textEl.appendChild(descrEl);
 
         }
     }
 }
 
-getDigimon();
+getDigimon('https://digi-api.com/api/v1/digimon');
